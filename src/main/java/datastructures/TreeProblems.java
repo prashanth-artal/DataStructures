@@ -123,7 +123,19 @@ public class TreeProblems {
 			TreeNode  node = stack2.pop();
 			System.out.print(node.val+" ");
 		}
+		System.out.println();
 	}
+	public static int heightOfTree(TreeNode root) {
+		if(root == null) {
+			return 0;
+		}
+		
+		int left = 1+heightOfTree(root.left);
+		int right = 1+heightOfTree(root.right);
+		
+		return Math.max(left, right);
+	}
+	
 	public static void main(String[] args) {
 		int[] arr = {10,20,30,40,50,60,70};
 		TreeNode root = createBST(arr,0,arr.length-1);
@@ -131,5 +143,9 @@ public class TreeProblems {
 		preOrder(root);
 		inOrder(root);
 		postOrder(root);
+		root.right.right.right = new TreeNode(90);
+		
+		int height = heightOfTree(root);
+		System.out.println("Height: "+height);
 	}
 }
